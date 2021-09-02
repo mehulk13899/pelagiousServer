@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const _env = require('dotenv')
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRoutes = require('./src/routes/user')
 const adminRoutes = require('./src/routes/admin/user')
@@ -16,7 +15,6 @@ const adminOrderRoutes = require('./src/routes/admin/order')
 const reviewRoutes = require('./src/routes/review')
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-const { requiredSignIn } = require('./common-middleware')
 const path = require('path')
 const cors = require('cors')
 _env.config();
@@ -41,7 +39,8 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useFindAndModify: false,
+      useCreateIndex:true
     }
   )
   .then(() => {
@@ -59,7 +58,8 @@ mongoose
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+      useCreateIndex:true
       }
     )
     .then(() => {
