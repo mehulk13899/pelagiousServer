@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "nexe index.js -r \"src/**/*\"  -a \"windows-x64-14.15.3\""
+    "build": "nexe index.js -r \"src/**/*\" -r \"node_modules/**/*\"  -a \"windows-x64-14.15.3\""
   },
   "author": "siddharth patel",
   "license": "ISC",
