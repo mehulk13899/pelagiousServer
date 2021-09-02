@@ -45,7 +45,7 @@ mongoose
     }
   )
   .then(() => {
-    console.log("local database connected");
+    console.log("Local database connected");
   })
   .catch(async (err) => {
     console.log(err);
@@ -53,24 +53,24 @@ mongoose
   var db = mongoose.connection;
   db.on('error',()=>{
     console.error.bind(console, 'connection error:');
-    
+    mongoose
+    .connect(
+      `${process.env.DB_BACKUP}`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+      }
+    )
+    .then(() => {
+      console.log("Remote database connected");
+    })
   });
   db.once('open', function callback() {
-    console.log("h");
+    console.log("Connected");
   });
 
-  await mongoose
-      .connect(
-        `${process.env.DB_BACKUP}`,
-        {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-          useFindAndModify: false
-        }
-      )
-      .then(() => {
-        console.log("remote database connected");
-      })
+  
 app.use(cors())
 // app.use(jwtCheck);
 app.use(express.json())
@@ -88,7 +88,6 @@ app.use('/api', adminOrderRoutes)
 app.use('/api', reviewRoutes)
 
 app.get('/api/check', (req, res) => {
-
   res.send("you are logged in")
 })
 
