@@ -16,7 +16,7 @@ const adminOrderRoutes = require('./src/routes/admin/order')
 const reviewRoutes = require('./src/routes/review')
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-// const { requiredSignIn } = require('./common-middleware')
+const { requiredSignIn } = require('./common-middleware')
 const path = require('path')
 const cors = require('cors')
 _env.config();
@@ -67,7 +67,7 @@ mongoose
     })
   });
   db.once('open', function callback() {
-    console.log("Connected");
+    console.log("Connected with Database Done.");
   });
 
   
